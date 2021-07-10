@@ -1,0 +1,16 @@
+.img{
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+  }
+
+  .img_prof{
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+  }
+
+  .profile__info {
+    padding: 20px;
+  }

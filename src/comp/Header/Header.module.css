@@ -1,0 +1,16 @@
+.header{
+  grid-area: h;
+  background-color: #88d473;
+  display: flex;
+  align-items: center;
+  }
+
+.img{
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+}
+
+.name {
+  color: white;
+}

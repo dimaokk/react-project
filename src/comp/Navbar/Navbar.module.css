@@ -1,0 +1,16 @@
+.navbar {
+  grid-area: n;
+  background-color: #7d5ab1;
+  padding:20px;
+  height: 500px;
+}
+
+.item a{
+  color: white;
+  font-size: 22px;
+}
+
+
+.item a.active{
+  color:rgb(140, 210, 142);
+}
