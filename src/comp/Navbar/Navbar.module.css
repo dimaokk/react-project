@@ -1,16 +1,16 @@
 .navbar {
-  grid-area: n;
-  background-color: #7d5ab1;
-  padding:20px;
-  height: 500px;
+    grid-area: n;
+    background-color: #414141;
+    padding: 20px;
+    height: 500px;
+    border-radius: 10px;
 }
 
-.item a{
-  color: white;
-  font-size: 22px;
+.item a {
+    color: white;
+    font-size: 22px;
 }
 
-
-.item a.active{
-  color:rgb(140, 210, 142);
+.item a.active {
+    color: rgb(140, 210, 142);
 }

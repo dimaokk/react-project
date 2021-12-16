@@ -1,28 +1,40 @@
-*{
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  text-decoration: none;
-  
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,500;1,400&display=swap");
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+    outline: none;
+    text-decoration: none;
+    font-family: "Roboto", sans-serif;
+    
+}
+
+body {
+    background-color: #202020;
 }
 
 a {
-  color: white;
+    color: white;
 }
 
 .app_wrapper {
-  width: 1400px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 2fr 10fr;
-  grid-template-rows: 60px 1fr;
-  gap: 10px;
-  grid-template-areas:
-  "h h h"
-  "n c c" ;
+    width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 10fr;
+    grid-template-rows: 60px 1fr;
+    gap: 10px;
+    grid-template-areas:
+        "h h h"
+        "n c c";
 }
 
-.app_wrapper_cont{
+.app_wrapper_cont {
     grid-area: c;
-    background-color: #eaa57e;
+    background-color: #414141;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
 }

@@ -1,24 +1,48 @@
-import React from 'react';
-import dialogsCss from './Dialogs.module.css'
-// import { NavLink } from 'react-router-dom';
-import DialogItem from './DialogItem/DialogsItem';
-import Massege from './Message/Massege';
+import React from "react";
+import styles from "./Dialogs.module.css";
+import DialogItem from "./DialogItem/DialogsItem";
+import Massege from "./Message/Massege";
 
 const Dialogs = (props) => {
+    let state = props.dialogs;
 
-    let dialogElem = props.state.dialogData.map(d => <DialogItem name={d.name} id={d.id} />)
-    let massegeElem = props.state.massegeData.map(m => <Massege massege={m.massege} />)
+    let dialogElements = state.dialogs.map((d) => (
+        <DialogItem name={d.name} id={d.id} />
+    ));
+    let messageElements = state.messages.map((m) => (
+        <Massege message={m.message} />
+    ));
+
+    let newMessageText = state.newMessageText;
+
+    let onSendMessageClick = () => {
+        props.sendMessage();
+    };
+    let onNewMessageChange = (e) => {
+        let body = e.target.value;
+        props.updateNewMessageText(body);
+    };
 
     return (
-        <div className={dialogsCss.dialogs}>
-            <div className={dialogsCss.dialogs__item}>
-                {dialogElem}
-            </div>
-            <div className={dialogsCss.masseges}>
-                {massegeElem}
+        <div className={styles.dialogs}>
+            <div className={styles.dialogs__item}>{dialogElements}</div>
+            <div className={styles.masseges}>
+                <div>{messageElements}</div>
+                <div>
+                    <div>
+                        <textarea
+                            value={newMessageText}
+                            placeholder="Enter message text"
+                            onChange={onNewMessageChange}
+                        />
+                    </div>
+                    <div>
+                        <button onClick={onSendMessageClick}>Send</button>
+                    </div>
+                </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default Dialogs
+export default Dialogs;
