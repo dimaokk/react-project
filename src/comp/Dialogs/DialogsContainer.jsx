@@ -1,4 +1,4 @@
-import React from "react";
+
 import {
   sendMessageCreator,
   updateNewMessageTextCreator,
@@ -14,11 +14,11 @@ let mapStateToProps = (state) => {
 
 let mapDispatchToProps = (dispatch) => {
   return {
-    updateNewMessageText: () => {
-      dispatch(updateNewMessageTextCreator());
+    updateNewMessageText: (body) => {
+      dispatch(updateNewMessageTextCreator(body));
     },
-    sendMessage: (body) => {
-      dispatch(sendMessageCreator(body));
+    sendMessage: () => {
+      dispatch(sendMessageCreator());
     },
   };
 };

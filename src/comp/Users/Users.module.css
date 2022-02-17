@@ -1,0 +1,103 @@
+.usersContainer {
+  width: 90%;
+  margin: 0 auto;
+  padding: 30px 0;
+  color: white;
+}
+.btn {
+  margin-bottom: 30px;
+  padding: 30px 70px;
+  border-radius: 12px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.userBlock {
+  display: flex;
+  margin-bottom: 30px;
+}
+
+.namephoto {
+  margin-bottom: 10px;
+}
+
+.left {
+  max-width: 80px;
+  display: flex;
+  flex-direction: column;
+  margin-right: 80px;
+}
+
+.name {
+  font-size: 23px;
+  text-align: center;
+}
+
+.photo {
+  background-color: cadetblue;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.btnFo {
+  background-color: cadetblue;
+  padding: 7px 12px;
+  cursor: pointer;
+  border-radius: 10px;
+  color: white;
+}
+
+.btnUn {
+  background-color: rgb(170, 177, 238);
+  padding: 7px 12px;
+  cursor: pointer;
+  border-radius: 10px;
+  color: white;
+}
+
+.right {
+  min-width: 10%;
+  width: 60%;
+  max-width: 100%;
+  border: 1px solid cadetblue;
+  border-radius: 10px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.status {
+  font-size: 17px;
+}
+
+.geo {
+  display: flex;
+  flex-direction: column;
+}
+.nav {
+  margin-bottom: 30px;
+}
+
+.selected {
+  padding: 10px;
+  background-color: rgb(170, 177, 238);
+  color: white;
+  border-radius: 12px;
+  margin-right: 5px;
+}
+
+.nav_item {
+  padding: 10px;
+  background-color: cadetblue;
+  color: white;
+  border-radius: 12px;
+  margin-right: 5px;
+}
+
+
+.load {
+  margin: 0 auto;
+}
