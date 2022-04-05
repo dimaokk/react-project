@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./Users.module.css";
 import photo from "../../assets/photo.jpeg";
+import { NavLink } from "react-router-dom";
 
 const Users = (props) => {
   let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
@@ -19,7 +20,7 @@ const Users = (props) => {
                 props.currentPage === p ? styles.selected : styles.nav_item
               }
               onClick={(e) => {
-               props.onPageChange(p);
+                props.onPageChange(p);
               }}
             >
               {p}
@@ -31,17 +32,19 @@ const Users = (props) => {
         <div className={styles.userBlock} key={u.id}>
           <div className={styles.left}>
             <div className={styles.namephoto}>
-              <img
-                src={u.photos.small != null ? u.photos.small : photo}
-                alt="userphoto"
-                className={styles.photo}
-              />
+              <NavLink to={"/profile/" + u.id}>
+                <img
+                  src={u.photos.small != null ? u.photos.small : photo}
+                  alt="userphoto"
+                  className={styles.photo}
+                />
+              </NavLink>
 
               <div className={styles.name}>{u.name}</div>
             </div>
             {u.follow ? (
               <button
-                className={styles.btnUn}
+                disabled={props.followDiasable.some((id) => id === u.id)}
                 onClick={() => {
                   props.unfollow(u.id);
                 }}
@@ -50,7 +53,7 @@ const Users = (props) => {
               </button>
             ) : (
               <button
-                className={styles.btnFo}
+                disabled={props.followDiasable.some((id) => id === u.id)}
                 onClick={() => {
                   props.follow(u.id);
                 }}

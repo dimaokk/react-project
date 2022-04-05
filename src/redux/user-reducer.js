@@ -1,16 +1,20 @@
+import { userAPI } from "../api/api";
+
 const FOLLOW = "FOLLOW";
 const UNFOLLOW = "UNFOLLOW";
 const SET_USERS = "SET_USERS";
 const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
 const SET_TOTAL_USER_COUNT = "SET_TOTAL_USER_COUNT";
 const TOGLE_IS_FETCHING = "TOGLE_IS_FETCHING";
+const TOGLE_FOLLOW_DISABLE = "TOGLE_FOLLOW_DISABLE";
 
 let initialState = {
   users: [],
   pageSize: 10,
   totalUsersCount: 0,
   currentPage: 1,
-  isFetch: false,
+  isFetching: false,
+  followDiasable: [],
 };
 
 const userReducer = (state = initialState, action) => {
@@ -58,25 +62,84 @@ const userReducer = (state = initialState, action) => {
     case TOGLE_IS_FETCHING:
       return {
         ...state,
-        isFetch: action.isFetch,
+        isFetching: action.isFetching,
       };
+
+    case TOGLE_FOLLOW_DISABLE: {
+      return {
+        ...state,
+        followDiasable: action.isFetching
+          ? [...state.followDiasable, action.userId]
+          : state.followDiasable.filter((id) => id !== action.userId),
+      };
+    }
 
     default:
       return state;
   }
 };
 
-export const followAC = (userID) => ({ type: FOLLOW, userID });
-export const unfollowAC = (userID) => ({ type: UNFOLLOW, userID });
-export const setUsersAC = (users) => ({ type: SET_USERS, users });
-export const setCurrentPageAC = (currentPage) => ({
+//action creater
+
+export const followSucces = (userID) => ({ type: FOLLOW, userID });
+export const unfollowSucces = (userID) => ({ type: UNFOLLOW, userID });
+export const setUsers = (users) => ({ type: SET_USERS, users });
+export const setCurrentPage = (currentPage) => ({
   type: SET_CURRENT_PAGE,
   currentPage,
 });
-export const setTotalUsersCountAC = (totalUsersCount) => ({
+export const setTotalUsersCount = (totalUsersCount) => ({
   type: SET_TOTAL_USER_COUNT,
   totalUsersCount,
 });
-export const isFetchAC = (isFetch) => ({ type: TOGLE_IS_FETCHING, isFetch });
+export const TogleisFetching = (isFetching) => ({
+  type: TOGLE_IS_FETCHING,
+  isFetching,
+});
+export const togleDisable = (isFetching, userId) => ({
+  type: TOGLE_FOLLOW_DISABLE,
+  isFetching,
+  userId,
+});
+
+//thunk
+
+export const getUsersTc = (currentPage, pageSize) => {
+  return (dispatch) => {
+    dispatch(TogleisFetching(true));
+
+    userAPI.getUsers(currentPage, pageSize).then((data) => {
+      dispatch(TogleisFetching(false));
+      dispatch(setUsers(data.items));
+      dispatch(setTotalUsersCount(data.totalCount));
+    });
+  };
+};
+
+export const followTc = (userID) => {
+  return (dispatch) => {
+    dispatch(togleDisable(true, userID));
+
+    userAPI.follow(userID).then((response) => {
+      if (response.data.resultCode === 0) {
+        dispatch(followSucces(userID));
+      }
+      dispatch(togleDisable(false, userID));
+    });
+  };
+};
+
+export const unfollowTc = (userID) => {
+  return (dispatch) => {
+    dispatch(togleDisable(true, userID));
+
+    userAPI.follow(userID).then((response) => {
+      if (response.data.resultCode === 0) {
+        dispatch(unfollowSucces(userID));
+      }
+      dispatch(togleDisable(false, userID));
+    });
+  };
+};
 
 export default userReducer;

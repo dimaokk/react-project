@@ -6,15 +6,16 @@ import MyPoststContainer from "./MyPost/MyPostContainer";
 import Profile from "./Profile/Profile";
 
 const Content = (props) => {
-    return (
-        <div>
-            <Profile />
-            <MyPoststContainer
-                store={props.store}
-                
-            />
-        </div>
-    );
+  return (
+    <div>
+      <Profile
+        profile={props.profile}
+        status={props.status}
+        updateStatus={props.updateStatus}
+      />
+      <MyPoststContainer />
+    </div>
+  );
 };
 
 export default Content;

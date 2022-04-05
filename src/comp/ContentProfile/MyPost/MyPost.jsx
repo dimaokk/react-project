@@ -1,42 +1,25 @@
 import React from "react";
-import myPostsClass from "./MyPosts.module.css";
+import styles from "./MyPosts.module.css";
 import Post from "./Post/Post";
+import { PostReduxForm } from "./PostForm/PostForm";
 
 const MyPostst = (props) => {
-    let postsElement = props.posts.map((p) => (
-        <Post message={p.message} like={p.like} />
-    ));
+  let postsElement = props.posts.map((p) => (
+    <Post key={p.like} message={p.message} like={p.like} />
+  ));
 
-    let newPostElement = React.createRef();
-
-    let onAddPosts = () => {
-        props.addPosts();
-    };
-
-    let onPostChange = () => {
-        let text = newPostElement.current.value;
-        props.updateNewPostText(text);
-    };
-
-    return (
-        <div className={myPostsClass.my_post}>
-            <div className={myPostsClass.addPostblock}>
-                <h2 className={myPostsClass.title}>My posts</h2>
-                <div>
-                    <textarea
-                        onChange={onPostChange}
-                        className={myPostsClass.input}
-                        placeholder="Введите текст"
-                        ref={newPostElement}
-                        value={props.newPostText}
-                    />
-                    <button onClick={onAddPosts}>Add</button>
-                </div>
-            </div>
-
-            <div className>{postsElement}</div>
-        </div>
-    );
+  const addPost = (values) => {
+    props.addPosts(values.postBody);
+  };
+  return (
+    <div className={styles.my_post}>
+      <div className={styles.addPostblock}>
+        <h2 className={styles.title}>My posts</h2>
+        <PostReduxForm onSubmit={addPost} />
+      </div>
+      <div className>{postsElement}</div>
+    </div>
+  );
 };
 
 export default MyPostst;

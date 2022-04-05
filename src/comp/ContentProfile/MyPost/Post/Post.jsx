@@ -7,7 +7,7 @@ const Post = (props) => {
             <div className={postsCss.block}>
                 <img
                     className={postsCss.img}
-                    src="https://image.flaticon.com/icons/png/512/147/147144.png"
+                    src="https://handcraftguide.com/sites/default/files/styles/original___water/public/sketchingforkids1handcraftguide.com__0.jpg?itok=CiUYaUmE"
                     alt=""
                 />
 
