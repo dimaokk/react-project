@@ -32,7 +32,7 @@ const LoginForm = (props) => {
           validate={[required]}
         />
       </div>
-      {props.error && <div>eror email or password</div>}
+      {props.error}
       <button>login</button>
     </form>
   );

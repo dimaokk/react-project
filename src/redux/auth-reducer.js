@@ -30,15 +30,13 @@ export const setUserData = (userID, email, login, isAuth) => ({
 
 //thunk
 
-export const getAuthUserData = () => {
-  return (dispatch) => {
-    authAPI.me().then((respons) => {
-      if (respons.data.resultCode === 0) {
-        let { id, email, login } = respons.data.data;
-        dispatch(setUserData(id, email, login, true));
-      }
-    });
-  };
+export const getAuthUserData = () => (dispatch) => {
+  return authAPI.me().then((respons) => {
+    if (respons.data.resultCode === 0) {
+      let { id, email, login } = respons.data.data;
+      dispatch(setUserData(id, email, login, true));
+    }
+  });
 };
 
 export const login = (email, password, rememberMe) => (dispatch) => {
@@ -46,7 +44,7 @@ export const login = (email, password, rememberMe) => (dispatch) => {
     if (respons.data.resultCode === 0) {
       dispatch(getAuthUserData());
     } else {
-      dispatch( stopSubmit("login", {_error: "email or password is erroe"}));
+      dispatch(stopSubmit("login", { _error: respons.data.messages[0] }));
     }
   });
 };

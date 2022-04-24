@@ -10,6 +10,14 @@ import {
 import React, { Component } from "react";
 import Users from "./Users";
 import { Preloader } from "../common/Preloader/Preloader";
+import {
+  getCurrentPage,
+  getFollowDiasable,
+  getIsFetching,
+  getPageSize,
+  getTotalUsersCount,
+  getUsers,
+} from "../../redux/users-selectors";
 
 class UsersAPI extends Component {
   componentDidMount() {
@@ -44,12 +52,12 @@ class UsersAPI extends Component {
 
 let mapStateToProps = (state) => {
   return {
-    users: state.userPage.users,
-    pageSize: state.userPage.pageSize,
-    totalUsersCount: state.userPage.totalUsersCount,
-    currentPage: state.userPage.currentPage,
-    isFetching: state.userPage.isFetching,
-    followDiasable: state.userPage.followDiasable,
+    users: getUsers(state),
+    pageSize: getPageSize(state),
+    totalUsersCount: getTotalUsersCount(state),
+    currentPage: getCurrentPage(state),
+    isFetching: getIsFetching(state),
+    followDiasable: getFollowDiasable(state),
   };
 };
 

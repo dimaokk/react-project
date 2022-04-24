@@ -104,42 +104,36 @@ export const togleDisable = (isFetching, userId) => ({
 
 //thunk
 
-export const getUsersTc = (currentPage, pageSize) => {
-  return (dispatch) => {
-    dispatch(TogleisFetching(true));
-
-    userAPI.getUsers(currentPage, pageSize).then((data) => {
-      dispatch(TogleisFetching(false));
-      dispatch(setUsers(data.items));
-      dispatch(setTotalUsersCount(data.totalCount));
-    });
-  };
+export const getUsersTc = (page, pageSize) => (dispatch) => {
+  dispatch(TogleisFetching(true));
+  dispatch(setCurrentPage(page));
+  userAPI.getUsers(page, pageSize).then((data) => {
+    dispatch(TogleisFetching(false));
+    dispatch(setUsers(data.items));
+    dispatch(setTotalUsersCount(data.totalCount));
+  });
 };
 
-export const followTc = (userID) => {
-  return (dispatch) => {
-    dispatch(togleDisable(true, userID));
+export const followTc = (userID) => (dispatch) => {
+  dispatch(togleDisable(true, userID));
 
-    userAPI.follow(userID).then((response) => {
-      if (response.data.resultCode === 0) {
-        dispatch(followSucces(userID));
-      }
-      dispatch(togleDisable(false, userID));
-    });
-  };
+  userAPI.follow(userID).then((response) => {
+    if (response.data.resultCode === 0) {
+      dispatch(followSucces(userID));
+    }
+    dispatch(togleDisable(false, userID));
+  });
 };
 
-export const unfollowTc = (userID) => {
-  return (dispatch) => {
-    dispatch(togleDisable(true, userID));
+export const unfollowTc = (userID) => (dispatch) => {
+  dispatch(togleDisable(true, userID));
 
-    userAPI.follow(userID).then((response) => {
-      if (response.data.resultCode === 0) {
-        dispatch(unfollowSucces(userID));
-      }
-      dispatch(togleDisable(false, userID));
-    });
-  };
+  userAPI.follow(userID).then((response) => {
+    if (response.data.resultCode === 0) {
+      dispatch(unfollowSucces(userID));
+    }
+    dispatch(togleDisable(false, userID));
+  });
 };
 
 export default userReducer;
