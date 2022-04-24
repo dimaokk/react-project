@@ -1,33 +1,25 @@
 import React from "react";
-import myPostsClass from "./MyPosts.module.css";
+import styles from "./MyPosts.module.css";
 import Post from "./Post/Post";
+import { PostReduxForm } from "./PostForm/PostForm";
 
 const MyPostst = (props) => {
-    let postsElem = props.posts.map((p) => (
-        <Post massage={p.massage} like={p.like} />
-    ));
+  let postsElement = props.posts.map((p) => (
+    <Post key={p.like} message={p.message} like={p.like} />
+  ));
 
-    let newPostEl = React.createRef();
-
-    let addPosts = () => {
-        let text = newPostEl.current.value;
-        props.addPost(text);
-    };
-
-    return (
-        <div className={myPostsClass.my_post}>
-            <h2>My posts</h2>
-            <div>
-                <textarea
-                    className={myPostsClass.input}
-                    placeholder="Введите текст"
-                    ref={newPostEl}
-                />
-                <button onClick={addPosts}>Add Post</button>
-            </div>
-            <div className>{postsElem}</div>
-        </div>
-    );
+  const addPost = (values) => {
+    props.addPosts(values.postBody);
+  };
+  return (
+    <div className={styles.my_post}>
+      <div className={styles.addPostblock}>
+        <h2 className={styles.title}>My posts</h2>
+        <PostReduxForm onSubmit={addPost} />
+      </div>
+      <div className>{postsElement}</div>
+    </div>
+  );
 };
 
 export default MyPostst;

@@ -4,7 +4,7 @@ import dialogsCss from './../Dialogs.module.css'
 
 const Massege =(props) => {
     return (
-        <div className={dialogsCss.massege}>{props.massege}</div>
+        <div className={dialogsCss.message}>{props.message}</div>
     )
 }
 

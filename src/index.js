@@ -2,22 +2,15 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
-import reportWebVitals from "./reportWebVitals";
-import { addPost,subscribe  } from "./redux/state";
-import state from "./redux/state";
+import store from "./redux/redux-store";
+import { BrowserRouter } from "react-router-dom";
+import { Provider } from "react-redux";
 
-let rerenderEntireTree = () => {
-    ReactDOM.render(
-        <React.StrictMode>
-            <App state={state} addPost={addPost} />
-        </React.StrictMode>,
-        document.getElementById("root")
-    );
-};
-
-rerenderEntireTree(state);
-
-subscribe(rerenderEntireTree)
-
-
-reportWebVitals();
+ReactDOM.render(
+  <BrowserRouter>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </BrowserRouter>,
+  document.getElementById("root")
+);
