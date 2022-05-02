@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Route, withRouter } from "react-router-dom";
+import { Route, withRouter, Switch } from "react-router-dom";
 import "./App.css";
 import HeaderContainer from "./comp/Header/HeaderContainer";
 import Navbar from "./comp/Navbar/Navbar";
@@ -25,10 +25,15 @@ class App extends Component {
         <HeaderContainer />
         <Navbar />
         <div className="app_wrapper_cont">
-          <Route path="/profile/:userId?" render={() => <ContentContainer />} />
-          <Route path="/dialogs" render={() => <DialogsContainer />} />
-          <Route path="/users" render={() => <UsersContainer />} />
-          <Route path="/login" render={() => <LoginContainer />} />
+          <Switch>
+            <Route
+              path="/profile/:userId?"
+              render={() => <ContentContainer />}
+            />
+            <Route path="/dialogs" render={() => <DialogsContainer />} />
+            <Route path="/users" render={() => <UsersContainer />} />
+            <Route path="/login" render={() => <LoginContainer />} />
+          </Switch>
         </div>
       </div>
     );

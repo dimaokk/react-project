@@ -36,7 +36,7 @@ let store = {
         console.log("state ismenen");
     },
 
-    getState() {
+    getStatecc() {
         return this._state;
     },
     subscribe(observer) {

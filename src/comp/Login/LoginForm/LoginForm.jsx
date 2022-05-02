@@ -2,6 +2,7 @@ import React from "react";
 import { Field, reduxForm } from "redux-form";
 import { required } from "../../../utils/validators/validators";
 import { Input } from "../../common/FormsControls/FormsControls";
+import { createField } from "../../common/FormsControls/FormsControls";
 const LoginForm = (props) => {
   return (
     <form onSubmit={props.handleSubmit}>
@@ -33,6 +34,15 @@ const LoginForm = (props) => {
         />
       </div>
       {props.error}
+      <div>
+        {props.captchaUrl && (
+          <img src={props.captchaUrl} alt={props.captchaUrl} />
+        )}
+      </div>
+      <div>
+        {props.captchaUrl &&
+          createField("Symbol", "captcha", [required], Input, {})}
+      </div>
       <button>login</button>
     </form>
   );

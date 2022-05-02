@@ -6,6 +6,8 @@ import {
   getProfileTc,
   getStatus,
   updateStatus,
+  updatePhoto,
+  saveProfile,
 } from "../../redux/profile-reducer";
 import { withRouter } from "react-router-dom";
 
@@ -13,7 +15,7 @@ import { withAuthRedirect } from "../../hoc/withAuthRedirect";
 import { compose } from "redux";
 
 class ContentContainer extends Component {
-  componentDidMount() {
+  refreshProfile() {
     let userId = this.props.match.params.userId;
     if (!userId) {
       userId = this.props.loginUserId;
@@ -21,14 +23,23 @@ class ContentContainer extends Component {
     this.props.getProfile(userId);
     this.props.getStatus(userId);
   }
-  
+
+  componentDidMount() {
+    this.refreshProfile();
+  }
+  componentDidUpdate() {
+    this.refreshProfile();
+  }
+
   render() {
     return (
       <Content
         {...this.props}
+        isOwner={!this.props.match.params.userId}
         profile={this.props.profile}
         status={this.props.status}
         updateStatus={this.props.updateStatus}
+        updatePhoto={this.props.updatePhoto}
       />
     );
   }
@@ -48,6 +59,8 @@ export default compose(
     getProfile: getProfileTc,
     getStatus,
     updateStatus,
+    updatePhoto,
+    saveProfile,
   }),
   withRouter,
   withAuthRedirect

@@ -1,9 +1,10 @@
-import { profileAPI} from "../api/api";
+import { profileAPI } from "../api/api";
 
 const ADD_POST = "ADD-POST";
 const SET_USER_PROFILE = "SET_USER_PROFILE";
 const SET_STATUS = "SET_STATUS";
 const UPDATE_STATUS = "UPDATE_STATUS";
+const UPDATE_PHOTO_SUCCES = "UPDATE_PHOTO_SUCCES";
 
 let initialState = {
   posts: [
@@ -49,6 +50,16 @@ const profileReducer = (state = initialState, action) => {
       };
     }
 
+    case UPDATE_PHOTO_SUCCES: {
+      return {
+        ...state,
+        profile: {
+          ...state.profile,
+          photos: action.photos,
+        },
+      };
+    }
+
     default:
       return state;
   }
@@ -67,6 +78,10 @@ const setUserProfile = (profile) => ({
 const setStatus = (status) => ({
   type: SET_STATUS,
   status,
+});
+const updatePhotoSucces = (photos) => ({
+  type: UPDATE_PHOTO_SUCCES,
+  photos,
 });
 
 //thunk
@@ -89,6 +104,24 @@ export const updateStatus = (status) => (dispatch) => {
       dispatch(setStatus(status));
     }
   });
+};
+
+export const updatePhoto = (file) => async (dispatch) => {
+  const response = await profileAPI.updateProfilePhoto(file);
+
+  if (response.data.resultCode === 0) {
+    dispatch(updatePhotoSucces(response.data.data.photos));
+    debugger;
+  }
+};
+
+export const saveProfile = (profile) => async (dispatch, getState) => {
+  const userID = getState().auth.userID;
+  let respons = await profileAPI.saveProfile(profile);
+
+  if (respons.data.resultCode === 0) {
+    dispatch(getProfileTc(userID));
+  }
 };
 
 export default profileReducer;

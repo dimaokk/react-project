@@ -10,6 +10,7 @@ export class LoginContainer extends Component {
         isAuth={this.props.isAuth}
         login={this.props.login}
         logout={this.props.logout}
+        captchaUrl={this.props.captchaUrl}
       />
     );
   }
@@ -17,6 +18,7 @@ export class LoginContainer extends Component {
 
 const mapStateToProps = (state) => ({
   isAuth: state.auth.isAuth,
+  captchaUrl: state.auth.captchaUrl,
 });
 
 export default connect(mapStateToProps, { login, logout })(LoginContainer);

@@ -9,9 +9,12 @@ const Content = (props) => {
   return (
     <div>
       <Profile
+        isOwner={props.isOwner}
         profile={props.profile}
         status={props.status}
-        updateStatus={props.updateStatus}
+        updateStatus={props.updateStatus} 
+        updatePhoto={props.updatePhoto}
+        saveProfile={props.saveProfile}
       />
       <MyPoststContainer />
     </div>
